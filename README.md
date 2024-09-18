@@ -7,7 +7,8 @@ Repo for "Flutter & Firebase Course - Build a Full Stack Instagram Clone" on You
 - Setting up a Flutter environment;
 - Responsive Widgets;
 - Firebase integration;
-- Login screen;
+- "Login" screen;
+- "Sign up" Screen;
 
 ## Tools
 
