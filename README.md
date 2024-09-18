@@ -1,16 +1,13 @@
 # instagram_clone
 
-A new Flutter project.
+Repo for "Flutter & Firebase Course - Build a Full Stack Instagram Clone" on Youtube, provided by [Rivaan Ranawat](https://github.com/RivaanRanawat/)
 
-## Getting Started
+## Practiced so far
 
-This project is a starting point for a Flutter application.
+- Setting up a Flutter environment;
+- Responsive Widgets;
+- Firebase integration;
 
-A few resources to get you started if this is your first Flutter project:
+## Tools
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+**Front-end:** Flutter, Firebase
