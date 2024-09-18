@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:instagram_clone/components/logo_banner.dart';
 import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/widgets/text_field_input.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  late Widget logoBanner;
+  LoginScreen({super.key, 
+  // required this.logoBanner
+  });
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -13,6 +17,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
 @override
   void dispose() {
     super.dispose();
@@ -31,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Flexible(flex: 2, child: Container()),
-              SvgPicture.asset('/ic_instagram.svg', colorFilter: const ColorFilter.mode(primaryColor, BlendMode.srcIn), height: 64), //color is curently deprecated, using ColorFilter instead
+              // Container(child: const LogoBanner()),
               const SizedBox(height: 64),
               TextFieldInput(
                 hintText: 'Enter your email',
