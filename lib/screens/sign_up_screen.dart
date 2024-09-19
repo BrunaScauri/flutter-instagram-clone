@@ -36,7 +36,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
             children: [
               Flexible(flex: 2, child: Container()),
               SvgPicture.asset('/ic_instagram.svg', colorFilter: const ColorFilter.mode(primaryColor, BlendMode.srcIn), height: 64), //color is curently deprecated, using ColorFilter instead
-              const SizedBox(height: 64),
+              const SizedBox(height: 32),
+              Stack(children: [
+                const CircleAvatar(
+                  radius: 64,
+                  backgroundImage: NetworkImage('https://images.unsplash.com/photo-1726340051943-b9bd0bdba776?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')),
+                Positioned(
+                  bottom: -10,
+                  left: 80,
+                  child: IconButton(onPressed: () {}, icon: const Icon(Icons.add_circle)))
+              ],),
+              const SizedBox(height: 24),
               TextFieldInput(
                 hintText: 'Enter your username',
                 textInputType: TextInputType.text,
