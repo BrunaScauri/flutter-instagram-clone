@@ -1,7 +1,11 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:instagram_clone/resources/auth_methods.dart';
 import 'package:instagram_clone/utils/colors.dart';
+import 'package:instagram_clone/utils/image_picker.dart';
 import 'package:instagram_clone/widgets/text_field_input.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -16,6 +20,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _bioController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
+  Uint8List? _image;
+
   @override
   void dispose() {
     super.dispose();
@@ -23,6 +29,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _passwordController.dispose();
     _bioController.dispose();
     _usernameController.dispose();
+  }
+
+  void selectImage() async {
+    Uint8List image = await pickImage(ImageSource.gallery);
+    setState(() {
+      _image = image;
+    });
   }
 
   @override
@@ -44,10 +57,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     const SizedBox(height: 32),
                     Stack(
                       children: [
-                        const CircleAvatar(
-                            radius: 64,
-                            backgroundImage: NetworkImage(
-                                'https://images.unsplash.com/photo-1726340051943-b9bd0bdba776?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')),
+                        _image != null
+                            ? CircleAvatar(
+                                radius: 64,
+                                backgroundImage: MemoryImage(_image!))
+                            : const CircleAvatar(
+                                radius: 64,
+                                backgroundImage: NetworkImage(
+                                    'https://i0.wp.com/digitalhealthskills.com/wp-content/uploads/2022/11/3da39-no-user-image-icon-27.png?fit=500%2C500&ssl=1')),
                         Positioned(
                             bottom: -10,
                             left: 80,
@@ -84,10 +101,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     InkWell(
                         onTap: () async {
                           String res = await AuthMethods().signUpUser(
-                              email: _emailController.text,
-                              password: _passwordController.text,
-                              username: _usernameController.text,
-                              bio: _bioController.text);
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                            username: _usernameController.text,
+                            bio: _bioController.text,
+                            file: _image!,
+                          );
                           print(res);
                         },
                         child: Container(
