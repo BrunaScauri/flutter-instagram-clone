@@ -7,9 +7,9 @@ import 'package:instagram_clone/screens/sign_up_screen.dart';
 
 
 
-void main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-   await Firebase.initializeApp();
+   Firebase.initializeApp();
   runApp(const MyApp());
 }
 
