@@ -10,6 +10,7 @@ Repo for "Flutter & Firebase Course - Build a Full Stack Instagram Clone" on You
 - "Login" screen;
 - "Sign up" Screen;
 - Account creation using Firebase Firestore;
+- User-picked profile picture
 
 ## Tools
 
