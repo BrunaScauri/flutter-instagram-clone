@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:instagram_clone/resources/auth_methods.dart';
 import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/utils/image_picker.dart';
+import 'package:instagram_clone/utils/show_snack_bar.dart';
 import 'package:instagram_clone/widgets/text_field_input.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -21,6 +22,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _bioController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   Uint8List? _image;
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -39,6 +41,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void signUpUser() async {
+    setState(() {
+      _isLoading = true;
+    });
     String res = await AuthMethods().signUpUser(
       email: _emailController.text,
       password: _passwordController.text,
@@ -46,9 +51,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
       bio: _bioController.text,
       file: _image!,
     );
-    if(res != 'success') {
+    if (res != 'success') {
       showSnackBar(res, context);
     }
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
+  void loadUser() {
+    setState(() {
+      _isLoading = true;
+    });
   }
 
   @override
@@ -112,7 +126,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     const SizedBox(height: 24),
                     InkWell(
-                        onTap: signUpUser,
+                        onTap: loadUser,
                         child: Container(
                           width: double.infinity,
                           alignment: Alignment.center,
@@ -122,7 +136,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(4))),
                               color: blueColor),
-                          child: const Text('Sign Up'),
+                          child: _isLoading
+                              ? const Center(child: CircularProgressIndicator(color: white) )
+                              : const Text('Sign Up'),
                         )),
                     const SizedBox(height: 12),
                     Flexible(flex: 2, child: Container()),
