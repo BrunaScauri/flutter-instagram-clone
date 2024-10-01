@@ -76,7 +76,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Flexible(flex: 2, child: Container()),
-                    SvgPicture.asset('/ic_instagram.svg',
+                    SvgPicture.asset('assets/ic_instagram.svg',
                         colorFilter:
                             const ColorFilter.mode(white, BlendMode.srcIn),
                         height:
@@ -137,7 +137,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       BorderRadius.all(Radius.circular(4))),
                               color: blueColor),
                           child: _isLoading
-                              ? const Center(child: CircularProgressIndicator(color: white) )
+                              ? const Center(
+                                  child:
+                                      CircularProgressIndicator(color: white))
                               : const Text('Sign Up'),
                         )),
                     const SizedBox(height: 12),
