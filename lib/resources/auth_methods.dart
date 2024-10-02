@@ -23,9 +23,9 @@ class AuthMethods {
           bio.isNotEmpty) {
         UserCredential cred = _auth.createUserWithEmailAndPassword(
             email: email, password: password) as UserCredential;
-        String photoUrl =
-            await StorageMethods().uploadImageToStorage('profilePics', file, false);
-        // .doc(cred.user!.uid) ensurs the user.id is the same one that firebase creates 'randomly'. the 'add' method doesnt do this.
+        String photoUrl = await StorageMethods()
+            .uploadImageToStorage('profilePics', file, false);
+        // .doc(cred.user!.uid) ensures the user.id is the same one that firebase creates 'randomly'. the 'add' method doesnt do this.
 
         await _firestore.collection('users').doc(cred.user!.uid).set({
           'username': username,
@@ -39,17 +39,35 @@ class AuthMethods {
         });
         res = 'success';
       }
-    } 
+    }
     // on FirebaseAuthException catch(err) { //example of error handling specific for FirebaseAuth
     //   if(err.code == 'invalid-email') {
     //     res = 'Please input a valid email.';
     //   } else if (err.code == 'weak-password') {
     //     res = 'Password is too weak. Please try again.';
     //   }
-    // } 
-    catch(err) {
-
+    // }
+    catch (err) {
       res = err.toString();
+    }
+    return res;
+  }
+
+  Future<String> loginUser({
+    required String email,
+    required String password,
+  }) async {
+    String res = 'Some error ocurred';
+    try {
+      if (email.isNotEmpty || password.isNotEmpty) {
+        await _auth.signInWithEmailAndPassword(
+            email: email, password: password);
+        res = 'success';
+      } else {
+        res = 'Please enter all the fields';
+      }
+    } catch (error) {
+      res = error.toString();
     }
     return res;
   }
