@@ -20,6 +20,7 @@ migrate_working_dir/
 # VS Code which you may wish to be included in version control, so this line
 # is commented out by default.
 .vscode/
+devtools_options.yaml
 
 # Flutter/Dart/Pub related
 **/doc/api/
@@ -30,7 +31,7 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-./pubspec.lock
+pubspec.lock
 
 # Symbolication related
 app.*.symbols
