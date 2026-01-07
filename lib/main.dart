@@ -5,18 +5,22 @@ import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/screens/login_screen.dart';
 import 'package:instagram_clone/screens/sign_up_screen.dart';
 
-
-
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-   Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: 'AIzaSyAbXRDSiOAWdS53Z-NIlzGQowyfcElNLPU',
+      appId: '1:387342447877:android:c577a37efcdb010a90b36c',
+      messagingSenderId: '387342447877',
+      projectId: 'instagram-clone-39e3f'
+    ),
+  );
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,8 +30,8 @@ class MyApp extends StatelessWidget {
         // home: const ResponsiveLayout(
         //     mobileScreenLayout: MobileScreenLayout(),
         //     webScreenLayout: WebScreenLayout()
-        // )
-        home: const SignUpScreen() //1:00:40
+        // ),
+        home: const LoginScreen()
     );
   }
 }
