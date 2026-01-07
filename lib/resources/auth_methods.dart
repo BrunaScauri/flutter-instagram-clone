@@ -19,12 +19,11 @@ class AuthMethods {
 
   Future<String> signUpUser({
     //future because it will be asynchronous
-    required String username,
     required String email,
     required String password,
     required String username,
     required String bio,
-    required Uint8List file,
+    required Uint8List photoUrl,
   }) async {
     String res = 'Some error ocurred';
     try {
@@ -33,28 +32,20 @@ class AuthMethods {
           email: email, password: password
         );
         print(cred.user!.uid);
-        // .doc(cred.user!.uid) ensures the user.id is the same one that firebase creates 'randomly'. the 'add' method doesnt do this.
+        // String photoUrl = await StorageMethods().uploadImageToStorage('profilePics', file, false);
 
         await _firestore.collection('users').doc(cred.user!.uid).set({
           'username': username,
           'uid': cred.user!.uid,
-          // photoUrl: photoUrl,
           'email': email,
           'bio': bio,
           'followers': [],
           'following': [],
+          // 'photoUrl': photoUrl,
         });
         res = 'success';
       }
-    }
-    // on FirebaseAuthException catch(err) { //example of error handling specific for FirebaseAuth
-    //   if(err.code == 'invalid-email') {
-    //     res = 'Please input a valid email.';
-    //   } else if (err.code == 'weak-password') {
-    //     res = 'Password is too weak. Please try again.';
-    //   }
-    // }
-    catch (err) {
+    } catch (err) {
       res = err.toString();
     }
     return res;
@@ -68,7 +59,8 @@ class AuthMethods {
     try {
       if (email.isNotEmpty || password.isNotEmpty) {
         await _auth.signInWithEmailAndPassword(
-            email: email, password: password);
+          email: email, password: password
+        );
         res = 'success';
       } else {
         res = 'Please enter all the fields';
