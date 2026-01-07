@@ -6,6 +6,7 @@ import 'package:instagram_clone/models/user.dart' as model;
 import 'package:instagram_clone/resources/storage_methods.dart';
 
 class AuthMethods {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -21,36 +22,28 @@ class AuthMethods {
     required String username,
     required String email,
     required String password,
+    required String username,
     required String bio,
     required Uint8List file,
   }) async {
     String res = 'Some error ocurred';
     try {
-      if (email.isNotEmpty ||
-          password.isNotEmpty ||
-          username.isNotEmpty ||
-          bio.isNotEmpty) {
-        UserCredential cred = _auth.createUserWithEmailAndPassword(
-            email: email, password: password) as UserCredential;
-        String photoUrl = await StorageMethods()
-            .uploadImageToStorage('profilePics', file, false);
+      if (email.isNotEmpty || password.isNotEmpty || username.isNotEmpty || bio.isNotEmpty) {
+        UserCredential cred = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password
+        );
+        print(cred.user!.uid);
         // .doc(cred.user!.uid) ensures the user.id is the same one that firebase creates 'randomly'. the 'add' method doesnt do this.
 
-        //add user to database
-        model.User user = model.User(
-          username: username,
-          uid: cred.user!.uid,
-          photoUrl: photoUrl,
-          email: email,
-          bio: bio,
-          following: [],
-          followers: [],
-        );
-
-        await _firestore
-            .collection('users')
-            .doc(cred.user!.uid)
-            .set(user.toJson());
+        await _firestore.collection('users').doc(cred.user!.uid).set({
+          'username': username,
+          'uid': cred.user!.uid,
+          // photoUrl: photoUrl,
+          'email': email,
+          'bio': bio,
+          'followers': [],
+          'following': [],
+        });
         res = 'success';
       }
     }
