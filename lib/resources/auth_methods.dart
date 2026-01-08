@@ -23,7 +23,7 @@ class AuthMethods {
     required String password,
     required String username,
     required String bio,
-    required Uint8List photoUrl,
+    // required Uint8List photoUrl,
   }) async {
     String res = 'Some error ocurred';
     try {

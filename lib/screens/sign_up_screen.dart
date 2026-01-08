@@ -53,7 +53,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       password: _passwordController.text,
       username: _usernameController.text,
       bio: _bioController.text,
-      photoUrl: _image!,
+      // photoUrl: _image!,
     );
 
     setState(() {
