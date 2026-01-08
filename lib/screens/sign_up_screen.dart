@@ -140,6 +140,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 hintText: 'Enter your password',
                 textInputType: TextInputType.text,
                 textEditingController: _passwordController,
+                isPass: true
               ),
               const SizedBox(height: 24),
               TextFieldInput(

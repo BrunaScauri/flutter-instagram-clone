@@ -84,6 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 hintText: 'Enter your password',
                 textInputType: TextInputType.text,
                 textEditingController: _passwordController,
+                isPass: true
               ),
               const SizedBox(height: 24),
               InkWell(
