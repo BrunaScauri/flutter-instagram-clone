@@ -33,12 +33,17 @@ class _LoginScreenState extends State<LoginScreen> {
       _isLoading = true;
     });
     String res = await AuthMethods().loginUser(
-        email: _emailController.text, password: _passwordController.text);
+      email: _emailController.text,
+      password: _passwordController.text
+    );
     if (res == 'success') {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => const ResponsiveLayout(
-              mobileScreenLayout: MobileScreenLayout(),
-              webScreenLayout: WebScreenLayout())));
+            mobileScreenLayout: MobileScreenLayout(),
+            webScreenLayout: WebScreenLayout()
+          )
+        ));
+      }
     } else {
       showSnackBar(res, context);
     }

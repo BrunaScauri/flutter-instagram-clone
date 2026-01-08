@@ -88,111 +88,109 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-            child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
-                width: double.infinity,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Flexible(flex: 2, child: Container()),
-                    SvgPicture.asset('assets/ic_instagram.svg',
-                      colorFilter: const ColorFilter.mode(white, BlendMode.srcIn),
-                      height: 64
-                    ),
-                    const SizedBox(height: 32),
-                    Stack(
-                      children: [
-                        _image != null
-                            ? CircleAvatar(
-                              radius: 64,
-                              backgroundImage: MemoryImage(_image!)
-                            )
-                            : const CircleAvatar(
-                              radius: 64,
-                              backgroundImage: NetworkImage('https://i0.wp.com/digitalhealthskills.com/wp-content/uploads/2022/11/3da39-no-user-image-icon-27.png?fit=500%2C500&ssl=1')
-                            ),
-                        Positioned(
-                          bottom: -10,
-                          left: 80,
-                          child: IconButton(
-                            onPressed: selectImage,
-                            icon: const Icon(Icons.add_a_photo),
-                            color: white,
-                          )
-                        )
-                      ],
-                    ),
-                    const SizedBox(height: 24),
-                    TextFieldInput(
-                      hintText: 'Enter your username',
-                      textInputType: TextInputType.text,
-                      textEditingController: _usernameController,
-                    ),
-                    const SizedBox(height: 24),
-                    TextFieldInput(
-                      hintText: 'Enter your email',
-                      textInputType: TextInputType.emailAddress,
-                      textEditingController: _emailController,
-                    ),
-                    const SizedBox(height: 24),
-                    TextFieldInput(
-                      hintText: 'Enter your password',
-                      textInputType: TextInputType.text,
-                      textEditingController: _passwordController,
-                    ),
-                    const SizedBox(height: 24),
-                    TextFieldInput(
-                      hintText: 'Enter your bio',
-                      textInputType: TextInputType.text,
-                      textEditingController: _bioController,
-                    ),
-                    const SizedBox(height: 24),
-                    InkWell(
-                        onTap: () async {
-                          String res = await AuthMethods().signUpUser(
-                            email: _emailController.text,
-                            password: _passwordController.text,
-                            username: _usernameController.text,
-                            bio: _bioController.text
-                          );
-                          print(res);
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          alignment: Alignment.center,
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          decoration: const ShapeDecoration(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(4))),
-                              color: blueColor),
-                          child: _isLoading
-                              ? const Center(
-                                  child:
-                                      CircularProgressIndicator(color: white))
-                              : const Text('Sign Up'),
-                        )),
-                    const SizedBox(height: 12),
-                    Flexible(flex: 2, child: Container()),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: const Text('Already have an account? '),
-                        ),
-                        GestureDetector(
-                          onTap: navigateToLogin,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 8),
-                            child: const Text('Log in',
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                          ),
-                        )
-                      ],
+      body: SafeArea(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 32),
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Flexible(flex: 2, child: Container()),
+              SvgPicture.asset('assets/ic_instagram.svg',
+                colorFilter: const ColorFilter.mode(white, BlendMode.srcIn),
+                height: 64
+              ),
+              const SizedBox(height: 32),
+              Stack(
+                children: [
+                  _image != null
+                  ? CircleAvatar(
+                    radius: 64,
+                    backgroundImage: MemoryImage(_image!)
+                  )
+                  : const CircleAvatar(
+                    radius: 64,
+                    backgroundImage: NetworkImage('https://i0.wp.com/digitalhealthskills.com/wp-content/uploads/2022/11/3da39-no-user-image-icon-27.png?fit=500%2C500&ssl=1')
+                  ),
+                  Positioned(
+                    bottom: -10,
+                    left: 80,
+                    child: IconButton(
+                      onPressed: selectImage,
+                      icon: const Icon(Icons.add_a_photo),
+                      color: white,
                     )
-                  ],
-                ))));
+                  )
+                ],
+              ),
+              const SizedBox(height: 24),
+              TextFieldInput(
+                hintText: 'Enter your username',
+                textInputType: TextInputType.text,
+                textEditingController: _usernameController,
+              ),
+              const SizedBox(height: 24),
+              TextFieldInput(
+                hintText: 'Enter your email',
+                textInputType: TextInputType.emailAddress,
+                textEditingController: _emailController,
+              ),
+              const SizedBox(height: 24),
+              TextFieldInput(
+                hintText: 'Enter your password',
+                textInputType: TextInputType.text,
+                textEditingController: _passwordController,
+              ),
+              const SizedBox(height: 24),
+              TextFieldInput(
+                hintText: 'Enter your bio',
+                textInputType: TextInputType.text,
+                textEditingController: _bioController,
+              ),
+              const SizedBox(height: 24),
+              InkWell(
+                onTap: signUpUser,
+                child: Container(
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  decoration: const ShapeDecoration(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4))
+                    ),
+                    color: blueColor
+                  ),
+                  child: _isLoading
+                  ? const Center(
+                      child: CircularProgressIndicator(color: white))
+                  : const Text('Sign Up'),
+                )
+              ),
+              const SizedBox(height: 12),
+              Flexible(flex: 2, child: Container()),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: const Text('Already have an account? '),
+                  ),
+                  GestureDetector(
+                    onTap: navigateToLogin,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: const Text(
+                        'Log in',
+                        style: TextStyle(fontWeight: FontWeight.bold)
+                      ),
+                    ),
+                  )
+                ],
+              )
+            ],
+          )
+        )
+      )
+    );
   }
 }

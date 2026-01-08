@@ -5,7 +5,13 @@ class TextFieldInput extends StatelessWidget {
   final bool isPass = false;
   final String hintText;
   final TextInputType textInputType;
-  const TextFieldInput({super.key, required this.textEditingController, required this.hintText, required this.textInputType});
+  
+  const TextFieldInput({
+    super.key,
+    required this.textEditingController,
+    required this.hintText,
+    required this.textInputType
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +26,9 @@ class TextFieldInput extends StatelessWidget {
         focusedBorder: inputBorder,
         filled: true,
         contentPadding: const EdgeInsets.all(8)
-
-        ),
-        keyboardType: textInputType,
-        obscureText: isPass,
-      );
+      ),
+      keyboardType: textInputType,
+      obscureText: isPass,
+    );
   }
 }
