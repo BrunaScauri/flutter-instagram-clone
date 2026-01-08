@@ -34,15 +34,17 @@ class AuthMethods {
         //currently not uploading to firestore as that requires a paid account :D
         // String photoUrl = await StorageMethods().uploadImageToStorage('profilePics', file, false);
 
-        await _firestore.collection('users').doc(cred.user!.uid).set({
-          'username': username,
-          'uid': cred.user!.uid,
-          'email': email,
-          'bio': bio,
-          'followers': [],
-          'following': [],
-          // 'photoUrl': photoUrl,
-        });
+        model.User user = model.User(
+          username: username,
+          email: email,
+          uid: cred.user!.uid,
+          // photoUrl: photoUrl,
+          bio: bio,
+          followers: [],
+          following: []
+        );
+
+        await _firestore.collection('users').doc(cred.user!.uid).set(user.toJson());
         res = 'success';
       }
     } catch (err) {
