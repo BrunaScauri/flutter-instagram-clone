@@ -53,19 +53,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
       password: _passwordController.text,
       username: _usernameController.text,
       bio: _bioController.text,
-      file: _image!,
+      photoUrl: _image!,
     );
-    if (res != 'success') {
-      showSnackBar(res, context);
-    } else {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => const ResponsiveLayout(
-              mobileScreenLayout: MobileScreenLayout(),
-              webScreenLayout: WebScreenLayout())));
-    }
+
     setState(() {
       _isLoading = false;
     });
+
+    if (res != 'success') {
+      if(mounted) showSnackBar(res, context);
+    } else {
+      if(mounted) {
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => const ResponsiveLayout(
+              mobileScreenLayout: MobileScreenLayout(),
+              webScreenLayout: WebScreenLayout()
+          )
+        ));
+      }
+    }
   }
 
   void loadUser() {
