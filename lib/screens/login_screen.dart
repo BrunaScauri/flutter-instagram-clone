@@ -86,17 +86,24 @@ class _LoginScreenState extends State<LoginScreen> {
                 textEditingController: _passwordController,
               ),
               const SizedBox(height: 24),
-              Container(
-                width: double.infinity,
-                alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                decoration: const ShapeDecoration(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(4))
+              InkWell(
+                onTap: loginUser,
+                child: Container(
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  decoration: const ShapeDecoration(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4))
+                    ),
+                    color: blueColor
                   ),
-                  color: blueColor
+                  child: _isLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(color: white)
+                      )
+                    : const Text('Log in'),
                 ),
-                child: const Text('Log in'),
               ),
               const SizedBox(height: 12),
               Flexible(flex: 2, child: Container()),
@@ -108,15 +115,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   GestureDetector(
                     onTap: navigateToSignUp,
-                    child: Container(
-                      child: _isLoading
-                      ? const Center(
-                          child: CircularProgressIndicator(color: white)
-                        )
-                      : const Text(
-                          'Sign up',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
+                    child: const Text(
+                      'Sign up',
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   )
                 ],
