@@ -31,7 +31,7 @@ class AuthMethods {
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
           email: email, password: password
         );
-        print(cred.user!.uid);
+        //currently not uploading to firestore as that requires a paid account :D
         // String photoUrl = await StorageMethods().uploadImageToStorage('profilePics', file, false);
 
         await _firestore.collection('users').doc(cred.user!.uid).set({
