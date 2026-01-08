@@ -37,6 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
       password: _passwordController.text
     );
     if (res == 'success') {
+      if(mounted) {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => const ResponsiveLayout(
             mobileScreenLayout: MobileScreenLayout(),
@@ -45,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ));
       }
     } else {
-      showSnackBar(res, context);
+      if(mounted) showSnackBar(res, context);
     }
     setState(() {
       _isLoading = false;
