@@ -34,7 +34,29 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: mobileBackgroundColor),
-        home: const LoginScreen()
+
+        home: StreamBuilder(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          //updates if and only if the user is logged in/out.
+          //.idTokenChanges() or userChanges() can also be used.
+          builder: (context, snapshot) {
+            if(snapshot.connectionState == ConnectionState.active) {
+              if(snapshot.hasData) {
+                return const ResponsiveLayout(
+                    mobileScreenLayout: MobileScreenLayout(),
+                    webScreenLayout: WebScreenLayout()
+                );
+              } else if(snapshot.hasError) {
+                return Center(child: Text('$snapshot.error'));
+              }
+            }
+            if(snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator(color: primaryColor));
+            }
+
+            return const LoginScreen();
+          }
+        )
     );
   }
 }
