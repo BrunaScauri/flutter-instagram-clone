@@ -65,6 +65,16 @@ class AuthMethods {
       } else {
         res = 'Please enter all the fields';
       }
+    }  on FirebaseAuthException catch(e) {
+      if(e.code == 'invalid-email') {
+        res = 'Email not valid. Please try again.';
+      }
+      if(e.code == 'missing-password') {
+        res = 'Please type a password.';
+      }
+      if(e.code == 'invalid-credential') {
+        res = 'Invalid user or password. Please try again.';
+      }
     } catch (error) {
       res = error.toString();
     }
