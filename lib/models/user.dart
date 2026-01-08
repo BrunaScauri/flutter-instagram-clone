@@ -39,6 +39,6 @@ class User {
       following: snapshot['following'],
       uid: snapshot['uid'],
       // photoUrl: snapshot['photoUrl'],
-      );
+    );
   }
 }
