@@ -70,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               Flexible(flex: 2, child: Container()),
               SvgPicture.asset('assets/ic_instagram.svg',
-                colorFilter: const ColorFilter.mode(white, BlendMode.srcIn),
+                colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
                 height: 64,
               ),
               const SizedBox(height: 64),
@@ -101,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   child: _isLoading
                     ? const Center(
-                        child: CircularProgressIndicator(color: white)
+                        child: CircularProgressIndicator(color: Colors.white)
                       )
                     : const Text('Log in'),
                 ),

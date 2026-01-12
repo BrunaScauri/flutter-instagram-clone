@@ -97,7 +97,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             children: [
               Flexible(flex: 2, child: Container()),
               SvgPicture.asset('assets/ic_instagram.svg',
-                colorFilter: const ColorFilter.mode(white, BlendMode.srcIn),
+                colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
                 height: 64
               ),
               const SizedBox(height: 32),
@@ -118,7 +118,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     child: IconButton(
                       onPressed: selectImage,
                       icon: const Icon(Icons.add_a_photo),
-                      color: white,
+                      color: Colors.white,
                     )
                   )
                 ],
@@ -163,7 +163,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   child: _isLoading
                   ? const Center(
-                      child: CircularProgressIndicator(color: white))
+                      child: CircularProgressIndicator(color: Colors.white))
                   : const Text('Sign Up'),
                 )
               ),
