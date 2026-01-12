@@ -33,14 +33,20 @@ class _LoginScreenState extends State<LoginScreen> {
       _isLoading = true;
     });
     String res = await AuthMethods().loginUser(
-        email: _emailController.text, password: _passwordController.text);
+      email: _emailController.text,
+      password: _passwordController.text
+    );
     if (res == 'success') {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
+      if(mounted) {
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => const ResponsiveLayout(
-              mobileScreenLayout: MobileScreenLayout(),
-              webScreenLayout: WebScreenLayout())));
+            mobileScreenLayout: MobileScreenLayout(),
+            webScreenLayout: WebScreenLayout()
+          )
+        ));
+      }
     } else {
-      showSnackBar(res, context);
+      if(mounted) showSnackBar(res, context);
     }
     setState(() {
       _isLoading = false;
@@ -64,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               Flexible(flex: 2, child: Container()),
               SvgPicture.asset('assets/ic_instagram.svg',
-                colorFilter: const ColorFilter.mode(white, BlendMode.srcIn),
+                colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
                 height: 64,
               ),
               const SizedBox(height: 64),
@@ -78,19 +84,27 @@ class _LoginScreenState extends State<LoginScreen> {
                 hintText: 'Enter your password',
                 textInputType: TextInputType.text,
                 textEditingController: _passwordController,
+                isPass: true
               ),
               const SizedBox(height: 24),
-              Container(
-                width: double.infinity,
-                alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                decoration: const ShapeDecoration(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(4))
+              InkWell(
+                onTap: loginUser,
+                child: Container(
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  decoration: const ShapeDecoration(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4))
+                    ),
+                    color: blueColor
                   ),
-                  color: blueColor
+                  child: _isLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(color: Colors.white)
+                      )
+                    : const Text('Log in'),
                 ),
-                child: const Text('Log in'),
               ),
               const SizedBox(height: 12),
               Flexible(flex: 2, child: Container()),
@@ -102,15 +116,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   GestureDetector(
                     onTap: navigateToSignUp,
-                    child: Container(
-                      child: _isLoading
-                      ? const Center(
-                          child: CircularProgressIndicator(color: white)
-                        )
-                      : const Text(
-                          'Sign up',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
+                    child: const Text(
+                      'Sign up',
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   )
                 ],

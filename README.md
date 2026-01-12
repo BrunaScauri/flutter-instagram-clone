@@ -1,8 +1,12 @@
-# instagram_clone
+# Project: Instagram Clone
 
-Repo for "Flutter & Firebase Course - Build a Full Stack Instagram Clone" on Youtube, provided by [Rivaan Ranawat](https://github.com/RivaanRanawat/)
+## Description
 
-## Practiced so far
+Repo for "Flutter & Firebase Course - Build a Full Stack Instagram Clone" on Youtube, provided by [Rivaan Ranawat](https://github.com/RivaanRanawat/).
+
+This project is intended as training grounds and exploratory programming around the Instagram app, focusing on its different functionalities and integrations of it systems/screens.
+
+## Topics Explored
 
 - Setting up a Flutter environment;
 - Responsive Widgets;
@@ -13,7 +17,11 @@ Repo for "Flutter & Firebase Course - Build a Full Stack Instagram Clone" on You
 - User submitted profile picture;
 - Page routing/Firebase's Stream Builder;
 
-## Tools
+## Stack
 
 **Front-end:** Flutter;
 **Back-end** Firebase;
+
+### Notes
+
+- This project doesn't upload the user profile image to Firestore.
